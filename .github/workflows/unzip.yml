@@ -1,0 +1,25 @@
+name: Unzip File Automatically
+
+on:
+  push:
+    paths:
+      - '**.zip' # Triggers whenever a .zip file is uploaded/pushed
+
+jobs:
+  unzip-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Unzip archive
+        run: |
+          # Unzips 'your-file.zip' into a directory named 'extracted'
+          unzip -o path/to/your-file.zip -d extracted/
+          # Optional: remove the zip file after extraction
+          rm path/to/your-file.zip
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-unzipped archive files"
