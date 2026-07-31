@@ -8,6 +8,8 @@ on:
 jobs:
   unzip-file:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Grants permission to commit changes back
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
